@@ -1,0 +1,4 @@
+rootProject.name = 'minispringmvc'
+include 'framework'
+include 'test'
+

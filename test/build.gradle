@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'com.simplefanc'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile(project(':framework'))
+//    应用模块打出的jar包里 包含框架模块的代码
+}
+jar{
+    manifest{
+        attributes "Main-Class":"com.simplefanc.Application"
+    }
+    from{
+        configurations.compile.collect{
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+//    自动打入所依赖的jar包
+}
