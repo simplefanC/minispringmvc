@@ -5,7 +5,6 @@ import com.simplefanc.web.handler.MappingHandler;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 public class DispatcherServlet implements Servlet {
     @Override
@@ -26,11 +25,7 @@ public class DispatcherServlet implements Servlet {
                 if(mappingHandler.handle(req, res)){//处理成功返回true
                     return;
                 }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

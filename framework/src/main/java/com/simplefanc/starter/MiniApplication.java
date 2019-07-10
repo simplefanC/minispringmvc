@@ -1,5 +1,6 @@
 package com.simplefanc.starter;
 
+import com.simplefanc.beans.BeanFactory;
 import com.simplefanc.core.ClassScanner;
 import com.simplefanc.web.handler.HandlerManager;
 import com.simplefanc.web.server.TomcatServer;
@@ -21,6 +22,9 @@ public class MiniApplication {
             //获取所有的class
             List<Class<?>> classList = ClassScanner.scanClasses(cls.getPackage().getName());
             classList.forEach(it -> System.out.println(it.getName()));
+
+            //初始化Bean
+            BeanFactory.initBean(classList);
 
             //调用HandlerManager初始化所有MappingHandler
             HandlerManager.resolveMappingHandler(classList);

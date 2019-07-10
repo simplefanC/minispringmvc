@@ -1,5 +1,7 @@
 package com.simplefanc.web.handler;
 
+import com.simplefanc.beans.BeanFactory;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +31,8 @@ public class MappingHandler {
             parameters[i] = req.getParameter(args[i]);//通过参数名获取ServletRequest里的参数
         }
 
-        Object ctl = controller.newInstance();//实例化controller
-//        Object ctl = BeanFactory.getBean(controller);
+//        Object ctl = controller.newInstance();//实例化controller
+        Object ctl = BeanFactory.getBean(controller);//从BeanFactory获得
         Object response = method.invoke(ctl, parameters);
         res.getWriter().println(response.toString());//将方法返回的结果放到ServletResponse里去
         return true;
